@@ -1,0 +1,9 @@
+<div>{{ totalVehicles$ | async }}</div>
+<div>{{ (speedAvg$ | async)?.toFixed(2) }} km/h</div>
+
+<div class="summary-items">
+<summary-item [iconClass]="'fa fa-car'" [bgColor]="'limegreen'" [vehicles]="cars$"></summary-item>
+<summary-item [iconClass]="'fa fa-truck'" [bgColor]="'orange'" [vehicles]="trucks$"></summary-item>
+<summary-item [iconClass]="'fa fa-motorcycle'" [bgColor]="'royalblue'" [vehicles]="bikes$"></summary-item>
+</div>
+
