@@ -1,9 +1,28 @@
-<div>{{ totalVehicles$ | async }}</div>
-<div>{{ (speedAvg$ | async)?.toFixed(2) }} km/h</div>
+<div class="category">
+  <div class="category-title">Total data</div>
+  <div class="summary-items">
+    <text-summary-item [title]="'Vehicles count'"
+                       [value]="totalVehicles$ | async"
+                       [bgColor]="'#A5AE33'"></text-summary-item>
 
-<div class="summary-items">
-<summary-item [iconClass]="'fa fa-car'" [bgColor]="'limegreen'" [vehicles]="cars$"></summary-item>
-<summary-item [iconClass]="'fa fa-truck'" [bgColor]="'orange'" [vehicles]="trucks$"></summary-item>
-<summary-item [iconClass]="'fa fa-motorcycle'" [bgColor]="'royalblue'" [vehicles]="bikes$"></summary-item>
+    <text-summary-item [bgColor]="'#666666'"
+                       [title]="'Speed average'"
+                       [value]="(speedAvg$ | async)?.toFixed(2)"
+                       [suffix]="'km/h'"></text-summary-item>
+
+    <text-summary-item [bgColor]="'darkred'"
+                       [title]="'Violations (speed > 120)'"
+                       [value]="speedViolations$ | async"></text-summary-item>
+  </div>
 </div>
+
+<div class="category">
+  <div class="category-title">Categories</div>
+  <div class="summary-items">
+    <summary-item [iconClass]="'fa fa-car'" [bgColor]="'limegreen'" [vehicles]="cars$"></summary-item>
+    <summary-item [iconClass]="'fa fa-truck'" [bgColor]="'orange'" [vehicles]="trucks$"></summary-item>
+    <summary-item [iconClass]="'fa fa-motorcycle'" [bgColor]="'royalblue'" [vehicles]="bikes$"></summary-item>
+  </div>
+</div>
+
 

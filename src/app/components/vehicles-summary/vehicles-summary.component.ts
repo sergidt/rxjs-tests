@@ -23,6 +23,7 @@ export class VehiclesSummaryComponent implements OnInit {
     bikes$: Observable<Vehicle>;
     trucks$: Observable<Vehicle>;
     speedAvg$: Observable<number>;
+    speedViolations$: Observable<number>;
 
     constructor(private vehicleService: VehicleService) {}
 
@@ -37,6 +38,9 @@ export class VehiclesSummaryComponent implements OnInit {
         this.trucks$ = this.vehicleService.vehicles$.filter(v => v.type === TRUCK);
 
         this.speedAvg$ = this.vehicleService.vehicles$.scan((total, cur) => (total + cur.speed) / 2, 0);
+
+        this.speedViolations$ = countObservableItems(this.vehicleService.vehicles$
+                             .filter(v => v.speed > 120));
     }
 
 }

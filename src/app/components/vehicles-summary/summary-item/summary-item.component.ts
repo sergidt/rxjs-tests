@@ -7,7 +7,7 @@ import { countObservableItems } from '../../../utils/utils';
     selector: 'summary-item',
     template: `<div class="summary-item" [style.background-color]="bgColor">
       <div class="icon {{iconClass}}"></div>
-      <div>
+      <div class="data">
         <div>counter: {{ counter$ | async }}</div>
         <div>speed: {{ (vehicles | async)?.speed }} km/h</div>
         <div>Speed Avg: {{ (speedAvg$ | async)?.toFixed(2) }} km/h</div>
@@ -17,21 +17,25 @@ import { countObservableItems } from '../../../utils/utils';
     styles: [`
         .summary-item {
             border-radius: 5px;
-            width: 280px;
             min-height: 80px;
             display: flex;
             flex-direction: row;
             align-items: center;
-            padding: 20px;
             color: white !important;
-            font-size: 14px;
-            margin-right: 20px;
+            font-size: 20px;
+            margin-right: 10px;
         }
 
         .icon {
-            padding-right: 20px;
+            padding: 20px;
             font-size: 40px;
             color: white !important;
+            border-right: solid 1px white;
+        }
+
+        .data {
+            padding:  0 15px;
+            min-width: 250px;
         }
     `]
 })

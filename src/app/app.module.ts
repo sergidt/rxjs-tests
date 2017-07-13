@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { VehicleService } from './services/vehicle.service';
 import { VehiclesSummaryComponent } from './components/vehicles-summary/vehicles-summary.component';
 import { SummaryItemComponent } from './components/vehicles-summary/summary-item/summary-item.component';
+import { TextSummaryItemComponent } from './components/vehicles-summary/text-summary-item/text-summary-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VehiclesSummaryComponent,
-    SummaryItemComponent
+    SummaryItemComponent,
+    TextSummaryItemComponent
   ],
   imports: [
     BrowserModule,
