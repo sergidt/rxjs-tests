@@ -1,14 +1,6 @@
-/*
-* Filters:
-* - type: earthquake
-* - situation: California
-* - magnitude: > 2
-*
-* Required data:
-* title
-*
-* Grouping by: magnitude (0, 1, 2, ...)
-* */
+import { Subject } from 'rxjs/Subject';
+
+export const earthquakes$: Subject<any> = new Subject<any>();
 
 interface Earthquake {
     title: string;
@@ -40,8 +32,7 @@ function decodeData(data) {
 
 function applyFilters(data) {
     const earthquakes = filterEarthquakes(data);
-    const groupedByMagnitude = groupByMagnitude(earthquakes);
-     console.log(groupedByMagnitude);
+    earthquakes$.next(groupByMagnitude(earthquakes));
 
 }
 
