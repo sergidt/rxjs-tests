@@ -8,17 +8,21 @@ import { VehicleService } from './services/vehicle.service';
 import { VehiclesSummaryComponent } from './components/vehicles-summary/vehicles-summary.component';
 import { SummaryItemComponent } from './components/vehicles-summary/summary-item/summary-item.component';
 import { TextSummaryItemComponent } from './components/vehicles-summary/text-summary-item/text-summary-item.component';
+import { AppRoutingModule } from './app-routing.module';
+import { EarthQuakesComponent } from './components/earth-quakes/earth-quakes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VehiclesSummaryComponent,
     SummaryItemComponent,
-    TextSummaryItemComponent
+    TextSummaryItemComponent,
+    EarthQuakesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule,
     HttpModule
   ],
   providers: [VehicleService],

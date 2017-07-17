@@ -7,7 +7,13 @@ import 'rxjs/add/operator/do';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `
+  <nav>
+    <a routerLink="/earth-quakes" routerLinkActive="active">Earth Quakes</a>
+    <a routerLink="/vehicles-summary" routerLinkActive="active">Vehicles summary</a>
+  </nav>
+  <router-outlet></router-outlet>
+            `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
