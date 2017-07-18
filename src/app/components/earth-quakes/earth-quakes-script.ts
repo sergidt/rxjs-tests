@@ -1,7 +1,3 @@
-import { Subject } from 'rxjs/Subject';
-
-export const earthquakes$: Subject<any> = new Subject<any>();
-
 interface Earthquake {
     title: string;
     place: string;
@@ -9,6 +5,7 @@ interface Earthquake {
     type: string;
 }
 
+let filteredData;
 
 const EARTH_QUAKES_URL = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson';
 const TYPE = 'earthquake';
@@ -25,15 +22,15 @@ const MAGNITUDE = 1.5;
     xmlHttp.send(null);
 }
 
-function decodeData(data) {
+function extractData(data) {
     const JSONData = JSON.parse(data);
     applyFilters(JSONData.features);
 }
 
 function applyFilters(data) {
     const earthquakes = filterEarthquakes(data);
-    earthquakes$.next(groupByMagnitude(earthquakes));
-
+    filteredData = groupByMagnitude(earthquakes);
+    console.log(filteredData);
 }
 
 function filterEarthquakes(data) {
@@ -63,5 +60,6 @@ function groupByMagnitude(earthquakes) {
 }
 
 export function mainJS() {
-    httpGetAsync(EARTH_QUAKES_URL, decodeData);
+    httpGetAsync(EARTH_QUAKES_URL, extractData);
+    console.log(filteredData);
 }
