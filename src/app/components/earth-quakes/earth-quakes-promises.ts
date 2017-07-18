@@ -12,14 +12,16 @@ const TYPE = 'earthquake';
 const SITUATION = 'California';
 const MAGNITUDE = 1.5;
 
- function httpGetAsync(theUrl, callback) {
-    let xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            callback(xmlHttp.responseText);
-    }
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous
-    xmlHttp.send(null);
+function httpGetAsync(URL): Promise<any> {
+    return new Promise((resolve, _) => {
+        let xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                resolve(xmlHttp.responseText);
+        }
+        xmlHttp.open("GET", URL, true); // true for asynchronous
+        xmlHttp.send(null);
+    });
 }
 
 function extractData(data) {
@@ -30,18 +32,17 @@ function extractData(data) {
 function applyFilters(data) {
     const earthquakes = filterEarthquakes(data);
     filteredData = groupByMagnitude(earthquakes);
-    console.log(filteredData);
 }
 
 function filterEarthquakes(data) {
-     let items = [];
-     for (const item of data) {
-         const properties = item.properties;
-         if (properties.type === TYPE && ~properties.place.indexOf(SITUATION) && properties.mag > MAGNITUDE) {
-             items.push(item);
-         }
-     }
-     return items;
+    let items = [];
+    for (const item of data) {
+        const properties = item.properties;
+        if (properties.type === TYPE && ~properties.place.indexOf(SITUATION) && properties.mag > MAGNITUDE) {
+            items.push(item);
+        }
+    }
+    return items;
 }
 
 function groupByMagnitude(earthquakes) {
@@ -59,7 +60,10 @@ function groupByMagnitude(earthquakes) {
     return groups;
 }
 
-export function mainJS() {
-    httpGetAsync(EARTH_QUAKES_URL, extractData);
-    console.log(filteredData);
+export function mainPromises() {
+    httpGetAsync(EARTH_QUAKES_URL)
+        .then(data => {
+            extractData(data);
+            console.log(filteredData);
+        });
 }
